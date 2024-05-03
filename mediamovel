@@ -64,3 +64,5 @@ for i in chirps:
     df[f'acumuladoMovel_{i}']= chirps[i].rolling(window=3).sum()
     #exportando para csv
     #df.to_excel(f'/home/cepremg/Documentos/thais/mediamovel_hist.xlsx')
+
+#fim
