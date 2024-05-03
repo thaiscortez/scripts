@@ -1,8 +1,6 @@
 !pip install xarray
 !pip install time
-!pip install proplot
 !pip install pandas
-!pip install matplotlib
 !pip install seaborn
 !pip install numpy
 !pip install csv
@@ -17,15 +15,6 @@ drive.mount('/content/drive')
 from haversine import haversine
 import pandas as pd
 from openpyxl import load_workbook
-###############################################
-import matplotlib
-matplotlib.rcParams.update({'font.size':22})
-from matplotlib import pyplot as plt
-from matplotlib.colors import LinearSegmentedColormap # interpolação linear para as cores dos mapas
-##############################################
-import proplot as plot
-#import cartopy.crs as ccrs
-#import cartopy.io.shapereader as shpreader
 ##############################################
 import math
 import numpy as np
