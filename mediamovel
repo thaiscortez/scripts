@@ -1,0 +1,66 @@
+!pip install xarray
+!pip install time
+!pip install proplot
+!pip install pandas
+!pip install matplotlib
+!pip install seaborn
+!pip install numpy
+!pip install csv
+!pip install datetime
+!pip install haversine
+
+#Conectando no drive
+from google.colab import drive
+drive.mount('/content/drive')
+
+#importando bibliotecas
+from haversine import haversine
+import pandas as pd
+from openpyxl import load_workbook
+###############################################
+import matplotlib
+matplotlib.rcParams.update({'font.size':22})
+from matplotlib import pyplot as plt
+from matplotlib.colors import LinearSegmentedColormap # interpolação linear para as cores dos mapas
+##############################################
+import proplot as plot
+#import cartopy.crs as ccrs
+#import cartopy.io.shapereader as shpreader
+##############################################
+import math
+import numpy as np
+from matplotlib.ticker import MultipleLocator
+from matplotlib.font_manager import FontProperties
+from datetime import datetime, timedelta
+
+## Passo (intervalo) entre as datas (um dia, neste exemplo)
+passo = timedelta(days=1)
+
+# Lista para armazenar as datas
+datas = []
+
+# Loop para gerar as datas consecutivas
+data_atual = data_inicio
+while data_atual <= data_fim:
+    datas.append(data_atual)
+    data_atual += passo
+
+# Exibir as datas geradas
+for data in datas:
+    print(data.strftime('%Y-%m-%d'))
+
+#utilizando dados do chirps
+chirps = pd.read_excel('/home/cepremg/Documentos/thais/dez2021/chirps_maxd.xlsx')
+chirps = chirps.set_index('date')
+cidades = ['caraí','carlos_chagas','gandu','ilheus','itabuna','itacare','itapetinga','jaguaquara','jampruca','matuipe','medeiros_neto','montes','porto','salvador','unai','vitoria']
+
+#media movel de 3 dias 
+#criando um dataframe vazio
+df = pd.DataFrame()
+#criando index
+df.index = datas
+#loop para recortar todas as cidades
+for i in chirps:
+    df[f'acumuladoMovel_{i}']= chirps[i].rolling(window=3).sum()
+    #exportando para csv
+    #df.to_excel(f'/home/cepremg/Documentos/thais/mediamovel_hist.xlsx')
