@@ -1,0 +1,63 @@
+!pip install xarray
+!pip install time
+!pip install pandas
+!pip install seaborn
+!pip install numpy
+!pip install csv
+!pip install datetime
+!pip install haversine
+
+from haversine import haversine
+import pandas as pd
+from openpyxl import load_workbook
+##############################################
+import math
+import numpy as np
+from matplotlib.ticker import MultipleLocator
+from matplotlib.font_manager import FontProperties
+from datetime import datetime, timedelta
+
+# Data de início e data de término
+data_inicio = datetime(1991, 1, 1)
+data_fim = datetime(2021, 12, 31)
+
+# Passo (intervalo) entre as datas (um dia, neste exemplo)
+passo = timedelta(days=1)
+
+# Lista para armazenar as datas
+datas = []
+
+# Loop para gerar as datas consecutivas
+data_atual = data_inicio
+while data_atual <= data_fim:
+    datas.append(data_atual)
+    data_atual += passo
+
+# Exibir as datas geradas
+for data in datas:
+    print(data.strftime('%Y-%m-%d'))
+
+p_dez = pd.read_excel('/content/drive/MyDrive/mestrado/Dados/chirps/chirps_maxd (1).xlsx', sheet_name='dez')
+
+# Lista para armazenar os resultados dos percentis
+resultados_percentis = []
+for coluna in p_dez.columns:
+     # Calcula os percentis desejados
+        p90 = np.percentile(p_dez[coluna], 90)
+        p95 = np.percentile(p_dez[coluna], 95)
+        p99 = np.percentile(p_dez[coluna], 99)
+
+        # Armazena os resultados em um dicionário
+        resultado_coluna = {
+            'Município': coluna,
+            'P90': p90,
+            'P95': p95,
+            'P99': p99
+        }
+
+        # Adiciona o dicionário à lista de resultados
+        resultados_percentis.append(resultado_coluna)
+
+# Converte a lista de resultados em um DataFrame
+df_resultados = pd.DataFrame(resultados_percentis)
+df_resultados
