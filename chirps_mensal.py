@@ -343,7 +343,7 @@ ax[2,1].set_ylabel('Precipitação mm/ano', fontsize=24)
 ax[2,1].set_xlabel('Anos', fontsize = 24)
 ax[2,1].text(0, 1.02, 'f)', transform=ax[2,1].transAxes, fontsize=14, fontweight='bold')
 
-fig.savefig('/content/drive/MyDrive/mestrado/Dados/chirps/anual2.png', dpi=300)
+fig.savefig('/content/drive/MyDrive/mestrado/Dados/chirps/anual.png', dpi=300)
 
 from datetime import datetime
 from dateutil.relativedelta import relativedelta
@@ -487,8 +487,7 @@ ax[3,1].tick_params(axis='y', labelsize=14, rotation=0)
 ax[3,1].set_xlabel('Anos', fontsize = 16)
 ax[3,1].text(0, 1.02, 'h)', transform=ax[3,1].transAxes, fontsize=14, fontweight='bold')
 
-fig.savefig('/content/drive/MyDrive/mestrado/Dados/Figuras/chirps/mensal_2.png', dpi=300)
+fig.savefig('/content/drive/MyDrive/mestrado/Dados/Figuras/chirps/mensal.png', dpi=300)
 
-sazonal = pd.read_excel('/home/cepremg/Documentos/thais/chirps/sazonal_media.xlsx')
-sazonal
+
 
